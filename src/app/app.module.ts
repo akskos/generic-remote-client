@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SettingsPage } from '../pages/settings/settings';
 import { ClientProvider } from '../providers/client-provider';
+import { ConfigProvider } from '../providers/config-provider';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ClientProvider } from '../providers/client-provider';
     SettingsPage
   ],
   providers: [
-    ClientProvider
+    ClientProvider,
+    ConfigProvider
   ]
 })
 export class AppModule {}
