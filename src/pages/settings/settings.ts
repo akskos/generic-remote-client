@@ -13,10 +13,18 @@ import { NavController } from 'ionic-angular';
 })
 export class SettingsPage {
 
-  constructor(public navCtrl: NavController) {}
+  usingPassword: boolean;
+
+  constructor(public navCtrl: NavController) {
+    this.usingPassword = false;
+  }
 
   ionViewDidLoad() {
     console.log('Hello Settings Page');
+  }
+
+  togglePassword(checked: boolean) {
+    this.usingPassword = checked;
   }
 
 }
