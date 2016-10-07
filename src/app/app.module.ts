@@ -3,6 +3,7 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SettingsPage } from '../pages/settings/settings';
+import { ClientProvider } from '../providers/client-provider';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { SettingsPage } from '../pages/settings/settings';
     HomePage,
     SettingsPage
   ],
-  providers: []
+  providers: [
+    ClientProvider
+  ]
 })
 export class AppModule {}

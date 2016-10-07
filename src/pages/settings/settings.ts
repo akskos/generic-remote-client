@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { ClientProvider } from '../../providers/client-provider';
 
 /*
   Generated class for the Settings page.
@@ -15,7 +16,7 @@ export class SettingsPage {
 
   usingPassword: boolean;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public client: ClientProvider) {
     this.usingPassword = false;
   }
 
@@ -25,6 +26,10 @@ export class SettingsPage {
 
   togglePassword(checked: boolean) {
     this.usingPassword = checked;
+  }
+
+  connect() {
+    console.log(this.client.isConnected);
   }
 
 }
