@@ -27,9 +27,4 @@ export class SettingsPage {
   togglePassword(checked: boolean) {
     this.usingPassword = checked;
   }
-
-  connect() {
-    console.log(this.client.isConnected);
-  }
-
 }

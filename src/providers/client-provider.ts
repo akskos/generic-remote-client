@@ -11,15 +11,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ClientProvider {
 
-  private _isConnected: boolean;
-
   constructor(public http: Http) {
     console.log('Hello ClientProvider Provider');
-    this._isConnected = false;
-  }
-
-  get isConnected(): boolean {
-    return this._isConnected;
   }
 
 }
