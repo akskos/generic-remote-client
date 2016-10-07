@@ -15,7 +15,10 @@ export class ConfigProvider {
   private _password: string;
 
   constructor() {
-    console.log('Hello ConfigProvider Provider');
+    this._port = 8080;
+    this._serverAddress = '';
+    this._passwordOn = false;
+    this._password = '';
   }
 
   public get port(): number {

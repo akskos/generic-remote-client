@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ClientProvider } from '../../providers/client-provider';
+import { ConfigProvider } from '../../providers/config-provider';
 
 /*
   Generated class for the Settings page.
@@ -16,8 +17,10 @@ export class SettingsPage {
 
   usingPassword: boolean;
 
-  constructor(public navCtrl: NavController, public client: ClientProvider) {
-    this.usingPassword = false;
+  constructor(
+    public navCtrl: NavController,
+    public client: ClientProvider,
+    public config: ConfigProvider) {
   }
 
   ionViewDidLoad() {
@@ -25,6 +28,21 @@ export class SettingsPage {
   }
 
   togglePassword(checked: boolean) {
-    this.usingPassword = checked;
+    this.config.passwordOn = checked;
+  }
+
+  portChanged(event: any) {
+    let strPort: string = event.target.value;
+    this.config.port = parseInt(strPort);
+  }
+
+  addressChanged(event: any) {
+    let address: string = event.target.value;
+    this.config.serverAddress = address;
+  }
+
+  passwordChanged(event: any) {
+    let password: string = event.target.value;
+    this.config.password = password;
   }
 }

@@ -15,16 +15,16 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-input type='text' placeholder='Server address'></ion-input>
+    <ion-input type='text' placeholder='Server address' (change)='addressChanged($event)'></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input type='number' placeholder='Port'></ion-input>
+    <ion-input type='number' placeholder='Port' (change)='portChanged($event)'></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Password</ion-label>
-    <ion-checkbox #passwdCheckbox color='dark' checked='{{usingPassword}}' (click)='togglePassword(!passwdCheckbox.checked)'></ion-checkbox>
+    <ion-checkbox #passwdCheckbox color='dark' checked='{{config.passwordOn}}' (click)='togglePassword(!passwdCheckbox.checked)'></ion-checkbox>
   </ion-item>
   <ion-item *ngIf='usingPassword'>
-    <ion-input type='password' placeholder='Password'></ion-input>
+    <ion-input type='password' placeholder='Password' (change)='passwordChanged($event)'></ion-input>
   </ion-item>
 </ion-content>
