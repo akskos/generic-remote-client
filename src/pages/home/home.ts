@@ -18,4 +18,8 @@ export class HomePage {
     this.navCtrl.push(SettingsPage);
   }
 
+  function(id) {
+    console.log(typeof(id));
+  }
+
 }
