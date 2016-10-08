@@ -4,13 +4,17 @@ import { NavController } from 'ionic-angular';
 
 import { SettingsPage } from '../settings/settings';
 
+import { ClientProvider } from '../../providers/client-provider';
+
+import { Response } from '@angular/http';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public client: ClientProvider) {
 
   }
 
@@ -19,7 +23,16 @@ export class HomePage {
   }
 
   function(id) {
-    console.log(typeof(id));
+    let observable = this.client.executeFunction(id);
+    //console.log(observable);
+    observable.subscribe((res: Response) => {
+      let data = res.json();
+      if (data.status == 9001) {
+        console.log('Function executed successfully');
+      } else if (data.status == 666) {
+        console.log('Function execution failed');
+      }
+    });
   }
 
 }
