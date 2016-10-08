@@ -24,7 +24,6 @@ export class HomePage {
 
   function(id) {
     let observable = this.client.executeFunction(id);
-    //console.log(observable);
     observable.subscribe((res: Response) => {
       let data = res.json();
       if (data.status == 9001) {

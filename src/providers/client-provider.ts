@@ -4,6 +4,8 @@ import 'rxjs/add/operator/map';
 
 import { ConfigProvider } from './config-provider';
 
+import URI from 'urijs';
+
 /*
   Generated class for the ClientProvider provider.
 
@@ -17,16 +19,21 @@ export class ClientProvider {
     console.log('Hello ClientProvider Provider');
   }
 
-  public executeFunction(id: number): any {
+  public executeFunction(functionID: number): any {
 
     // Build request url with ConfigProvider info and parameter 'id' given by HomePage
-    let address = this.config.serverAddress;
-    let port = this.config.port.toString();
-    let url = address + ":" + port + "/function?id=" + id.toString();
+    let uri = new URI();
+    uri.domain(this.config.serverAddress);
+    uri.scheme('http');
+    uri.port(this.config.port.toString());
+    uri.directory('function');
+    uri.query({id: functionID.toString()});
 
-    console.log('request url: ' + url);
 
-    return this.http.get(url);
+
+    console.log('request url: ' + uri.toString());
+
+    return this.http.get(uri.toString());
   }
 
 }
