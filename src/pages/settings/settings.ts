@@ -45,4 +45,8 @@ export class SettingsPage {
     let password: string = event.target.value;
     this.config.password = password;
   }
+
+  showPasswordField(): boolean {
+    return this.config.passwordOn;
+  }
 }
