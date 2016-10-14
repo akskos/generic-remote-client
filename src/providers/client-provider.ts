@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { ConfigProvider } from './config-provider';
@@ -26,14 +26,16 @@ export class ClientProvider {
     uri.domain(this.config.serverAddress);
     uri.scheme('http');
     uri.port(this.config.port.toString());
-    uri.directory('function');
+    uri.directory('/');
+    uri.filename('function');
     uri.query({id: functionID.toString()});
-
-
 
     console.log('request url: ' + uri.toString());
 
-    return this.http.get(uri.toString());
+    let headers = new Headers();
+    headers.append('Content-Type', 'text/plain');
+
+    return this.http.get(uri.toString(), { headers: headers });
   }
 
 }
