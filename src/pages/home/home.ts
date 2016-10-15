@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 
 import { SettingsPage } from '../settings/settings';
 
@@ -14,7 +14,7 @@ import { Response } from '@angular/http';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public client: ClientProvider) {
+  constructor(public navCtrl: NavController, public client: ClientProvider, public alertCtrl: AlertController) {
 
   }
 
@@ -29,7 +29,12 @@ export class HomePage {
       if (data.status == 9001) {
         console.log('Function executed successfully');
       } else if (data.status == 666) {
-        console.log('Function execution failed');
+        let failWarning = this.alertCtrl.create({
+          title: 'Command failed',
+          subTitle: 'Error code 666',
+          buttons: ['Ok']
+        });
+        failWarning.present();
       }
     });
   }
