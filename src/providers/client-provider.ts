@@ -22,16 +22,22 @@ export class ClientProvider {
   public executeFunction(functionID: number): any {
 
     // Build request url with ConfigProvider info and parameter 'id' given by HomePage
+
     let uri = new URI();
-    uri.domain(this.config.serverAddress);
-    uri.scheme('http');
-    uri.port(this.config.port.toString());
-    uri.directory('/');
-    uri.filename('function');
-    uri.query({id: functionID.toString()});
-    if (this.config.passwordOn) {
-      uri.addQuery({password: this.config.password});
+    try {
+      uri.domain(this.config.serverAddress);
+      uri.scheme('http');
+      uri.port(this.config.port.toString());
+      uri.directory('/');
+      uri.filename('function');
+      uri.query({id: functionID.toString()});
+      if (this.config.passwordOn) {
+        uri.addQuery({password: this.config.password});
+      }
+    } catch (e) {
+      throw new Error('Failed to create request');
     }
+
 
     console.log('request url: ' + uri.toString());
 

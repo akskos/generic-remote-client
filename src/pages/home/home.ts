@@ -23,20 +23,30 @@ export class HomePage {
   }
 
   function(id) {
-    let observable = this.client.executeFunction(id);
-    observable.subscribe((res: Response) => {
-      let data = res.json();
-      if (data.status == 9001) {
-        console.log('Function executed successfully');
-      } else if (data.status == 666) {
-        let failWarning = this.alertCtrl.create({
-          title: 'Command failed',
-          subTitle: 'Error code 666',
+    try {
+        let observable = this.client.executeFunction(id);
+
+        observable.subscribe((res: Response) => {
+          let data = res.json();
+          if (data.status == 9001) {
+            console.log('Function executed successfully');
+          } else if (data.status == 666) {
+            let alert = this.alertCtrl.create({
+              title: 'Command failed',
+              subTitle: 'Error code 666',
+              buttons: ['Ok']
+            });
+            alert.present();
+          }
+        });
+    } catch (e) {
+        let alert = this.alertCtrl.create({
+          title: 'Request failed',
+          subTitle: 'Failed to create request',
           buttons: ['Ok']
         });
-        failWarning.present();
-      }
-    });
+        alert.present();
+    }
   }
 
 }
