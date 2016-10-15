@@ -1,20 +1,20 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color='primary'>
     <ion-buttons end>
       <button ion-button (click)='gotoSettings()'>
         <ion-icon name='settings'></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>
-      Ionic Blank
+      Generic Remote
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <button ion-button full color='primary' (click)='function(1)'>1</button>
-  <button ion-button full color='primary' (click)='function(2)'>2</button>
-  <button ion-button full color='primary' (click)='function(3)'>3</button>
-  <button ion-button full color='primary' (click)='function(4)'>4</button>
-  <button ion-button full color='primary' (click)='function(4)'>5</button>
+  <button class='command-button' ion-button full round color='primary' (click)='function(1)'>1</button>
+  <button class='command-button' ion-button full round color='primary' (click)='function(2)'>2</button>
+  <button class='command-button' ion-button full round color='primary' (click)='function(3)'>3</button>
+  <button class='command-button' ion-button full round color='primary' (click)='function(4)'>4</button>
+  <button class='command-button' ion-button full round color='primary' (click)='function(4)'>5</button>
 </ion-content>
