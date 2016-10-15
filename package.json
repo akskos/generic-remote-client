@@ -26,7 +26,7 @@
     "@types/urijs": "1.15.31",
     "typescript": "^2.0.3"
   },
-  "description": "BlankIonicTest: An Ionic project",
+  "description": "Client for GenericRemote",
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
