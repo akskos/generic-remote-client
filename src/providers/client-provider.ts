@@ -29,6 +29,9 @@ export class ClientProvider {
     uri.directory('/');
     uri.filename('function');
     uri.query({id: functionID.toString()});
+    if (this.config.passwordOn) {
+      uri.addQuery({password: this.config.password});
+    }
 
     console.log('request url: ' + uri.toString());
 
