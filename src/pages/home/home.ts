@@ -22,30 +22,34 @@ export class HomePage {
     this.navCtrl.push(SettingsPage);
   }
 
+  alert(title, subtitle='') {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: subtitle,
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+
   function(id) {
     try {
         let observable = this.client.executeFunction(id);
 
-        observable.subscribe((res: Response) => {
-          let data = res.json();
-          if (data.status == 9001) {
-            console.log('Function executed successfully');
-          } else if (data.status == 666) {
-            let alert = this.alertCtrl.create({
-              title: 'Command failed',
-              subTitle: 'Error code 666',
-              buttons: ['Ok']
-            });
-            alert.present();
+        observable.subscribe(
+          (res: Response) => {
+            let data = res.json();
+            if (data.status == 9001) {
+              console.log('Function executed successfully');
+            } else if (data.status == 666) {
+              this.alert('Command failed', 'Error code 666');
+            }
+          },
+          (err: any) => {
+            this.alert('Request failed');
           }
-        });
+        );
     } catch (e) {
-        let alert = this.alertCtrl.create({
-          title: 'Request failed',
-          subTitle: 'Failed to create request',
-          buttons: ['Ok']
-        });
-        alert.present();
+        this.alert('Failed to create request', 'Something wrong with server config');
     }
   }
 
