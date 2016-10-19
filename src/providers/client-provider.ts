@@ -104,21 +104,26 @@ export class ClientProvider {
     let headers = new Headers();
     headers.append('Content-Type', 'text/plain');
 
-    return this.http.get(uri.toString(), { headers: headers });
+    return this.http.get(uri.toString(), { headers: headers }).map(
+      (res: Response) => {
+        return parseInt(res.json());
+      },
+      (err: Error) => {
+        throw new Error('Something went wrong in requestNumberOfCommands');
+      }
+    );
   }
 
   public requestCommandNames(): any {
 
     return this.requestNumberOfCommands().map(
-      (res: Response) => {
+      (ncommands: number) => {
 
         // This array will be passed on the stream
         // It contains streams of name requests
         let commandNameStreams = [];
 
         // Create requests for all command names
-        let ncommands: number = parseInt(res.json());
-        console.log(ncommands);
         for (let i = 1; i <= ncommands; i++) {
           let nameStream = this.requestCommandName(i).map(
             (commandName: string) => {
