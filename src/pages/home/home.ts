@@ -4,9 +4,12 @@ import { NavController, AlertController } from 'ionic-angular';
 
 import { SettingsPage } from '../settings/settings';
 
-import { ClientProvider } from '../../providers/client-provider';
+import { ClientProvider } from
+ '../../providers/client-provider';
 
 import { Response } from '@angular/http';
+
+import * as Rx from 'rxjs';
 
 @Component({
   selector: 'page-home',
@@ -14,8 +17,44 @@ import { Response } from '@angular/http';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public client: ClientProvider, public alertCtrl: AlertController) {
+  commandNames: string[] = [];
+  loadCommandNames: any;
 
+  constructor(public navCtrl: NavController, public client: ClientProvider, public alertCtrl: AlertController) {
+    this.commandNames.push('1');
+    this.commandNames.push('2');
+    this.commandNames.push('3');
+    this.commandNames.push('4');
+
+    // Create stream for loading command names
+    this.loadCommandNames = new Rx.Subject();
+    this.loadCommandNames.filter(
+      (x: any) => {
+        // Check that config is ready
+        if (this.client.configIsAvailable()) {
+          return true;
+        }
+        return false;
+      }
+    ).flatMap(
+      (x: any) => {
+        return this.client.requestCommandNames();
+      }
+    ).subscribe(
+      (commandNameStreams: any) => {
+        for (let i = 0; i < commandNameStreams.length; i++) {
+          commandNameStreams[i].subscribe(
+            (commandInfo: any) => {
+              this.commandNames[commandInfo.id] = commandInfo.name;
+            }
+          );
+        }
+      }
+    );
+  }
+
+  ionViewWillEnter() {
+    this.loadCommandNames.next(1);
   }
 
   gotoSettings() {
@@ -50,6 +89,7 @@ export class HomePage {
         );
     } catch (e) {
         this.alert('Failed to create request', 'Something wrong with server config');
+        console.log(e);
     }
   }
 
