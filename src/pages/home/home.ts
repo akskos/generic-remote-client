@@ -38,6 +38,7 @@ export class HomePage {
         if (this.client.configIsAvailable()) {
           return true;
         }
+        this.namesForCommandsReceived = false;
         return false;
       }
     ).flatMap(
