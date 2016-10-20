@@ -19,12 +19,16 @@ export class HomePage {
 
   commandNames: string[] = [];
   loadCommandNames: any;
+  namesForCommandsReceived: boolean;
 
   constructor(public navCtrl: NavController, public client: ClientProvider, public alertCtrl: AlertController) {
+
     this.commandNames.push('1');
     this.commandNames.push('2');
     this.commandNames.push('3');
     this.commandNames.push('4');
+
+    this.namesForCommandsReceived = false;
 
     // Create stream for loading command names
     this.loadCommandNames = new Rx.Subject();
@@ -49,6 +53,7 @@ export class HomePage {
             }
           );
         }
+        this.namesForCommandsReceived = true;
       }
     );
   }

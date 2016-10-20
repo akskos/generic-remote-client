@@ -12,8 +12,15 @@
 </ion-header>
 
 <ion-content padding>
-  <button class='command-button' ion-button full round style='background-color: #3a7113;' (click)='function(1)'>{{ commandNames[0] }}</button>
-  <button class='command-button' ion-button full round style='background-color: #2d8632;' (click)='function(2)'>{{ commandNames[1] }}</button>
-  <button class='command-button' ion-button full round style='background-color: #47AD4E;' (click)='function(3)'>{{ commandNames[2] }}</button>
-  <button class='command-button' ion-button full round style='background-color: #5B9632;' (click)='function(4)'>{{ commandNames[3] }}</button>
+
+  <div *ngIf="namesForCommandsReceived">
+    <button class='command-button' ion-button full round style='background-color: #3a7113;' (click)='function(1)'>{{ commandNames[0] }}</button>
+    <button class='command-button' ion-button full round style='background-color: #2d8632;' (click)='function(2)'>{{ commandNames[1] }}</button>
+    <button class='command-button' ion-button full round style='background-color: #47AD4E;' (click)='function(3)'>{{ commandNames[2] }}</button>
+    <button class='command-button' ion-button full round style='background-color: #5B9632;' (click)='function(4)'>{{ commandNames[3] }}</button>
+  </div>
+  <div *ngIf="!namesForCommandsReceived">
+    <p id='info-text'>No server specified</p>
+    <button class='goto-config-button' ion-button round style='background-color: #2d8632;' (click)='gotoSettings()'>Go to config</button>
+  </div>
 </ion-content>

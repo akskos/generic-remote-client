@@ -3,4 +3,18 @@ page-home {
     min-height: 80px;
     margin-bottom: 20px;
   }
+
+  .goto-config-button {
+    min-height: 40px;
+  }
+
+  p#info-text {
+    color: white;
+    font-size: 13pt;
+    margin-top: 50px;
+  }
+
+  ion-content {
+    text-align: center;
+  }
 }
