@@ -104,12 +104,13 @@ export class ClientProvider {
     let headers = new Headers();
     headers.append('Content-Type', 'text/plain');
 
-    return this.http.get(uri.toString(), { headers: headers }).map(
+    return this.http.get(uri.toString(), { headers: headers })
+    .map(
       (res: Response) => {
         return parseInt(res.json());
       },
       (err: Error) => {
-        throw new Error('Something went wrong in requestNumberOfCommands');
+        console.log('error caught in rx: ' + err)
       }
     );
   }
@@ -121,7 +122,9 @@ export class ClientProvider {
 
         // This array will be passed on the stream
         // It contains streams of name requests
-        let commandNameStreams = [];
+        let commandNameStreams = []
+
+        console.log(ncommands)
 
         // Create requests for all command names
         for (let i = 1; i <= ncommands; i++) {
@@ -143,7 +146,9 @@ export class ClientProvider {
         return commandNameStreams;
       },
       (err: Error) => {
-        throw new Error('requestCommandNames: request failed');
+        console.log('Error: ' + err);
+        return err;
+        //throw new Error('requestCommandNames: request failed');
       }
     );
   }

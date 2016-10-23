@@ -43,7 +43,12 @@ export class HomePage {
       }
     ).flatMap(
       (x: any) => {
-        return this.client.requestCommandNames();
+        return this.client.requestCommandNames().catch(
+          (err: Error, caught: Rx.Observable<any>) => {
+            this.alert('Error', err.toString());
+            return Rx.Observable.empty();
+          }
+        );
       }
     ).subscribe(
       (commandNameStreams: any) => {
@@ -55,11 +60,16 @@ export class HomePage {
           );
         }
         this.namesForCommandsReceived = true;
+      },
+      (err: Error) => {
+        //this.alert('Error', err.toString());
+        console.log('errörrör')
       }
     );
   }
 
   ionViewWillEnter() {
+    console.log('ionViewWillEnter');
     this.loadCommandNames.next(1);
   }
 
