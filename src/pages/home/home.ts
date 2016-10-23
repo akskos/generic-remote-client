@@ -45,7 +45,7 @@ export class HomePage {
       (x: any) => {
         return this.client.requestCommandNames().catch(
           (err: Error, caught: Rx.Observable<any>) => {
-            this.alert('Error', err.toString());
+            this.alert('Error', `Couldn't connect to the server`);
             return Rx.Observable.empty();
           }
         );
@@ -62,8 +62,7 @@ export class HomePage {
         this.namesForCommandsReceived = true;
       },
       (err: Error) => {
-        //this.alert('Error', err.toString());
-        console.log('errörrör')
+        this.alert('Error', '');
       }
     );
   }
